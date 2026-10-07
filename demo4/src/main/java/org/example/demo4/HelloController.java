@@ -87,7 +87,13 @@ public class HelloController implements Initializable {
             if (Objects.equals(TextFieldArray.get(i).getText(), "")) {
                 TextFieldArray.get(i).setStyle("-fx-border-color: red; -fx-border-width: 1px;");
             } else {
-                TextFieldArray.get(i).setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+                if (!Expose_input.getText().matches("\\d+")) {
+                    Expose_input.clear();
+                    Expose_input.setPromptText("number's only");
+                    Expose_input.setStyle("-fx-border-color: red;");
+                    return;
+                }
+                TextFieldArray.get(i).setStyle("-fx-border-color: green; -fx-border-width: 1px;");
                 filledFeilds++;
             }
         }
@@ -177,17 +183,8 @@ public class HelloController implements Initializable {
         String Copy = "COPY target/" + Artifact_input.getText() + " app.jar";
         System.out.println(Copy);
         System.out.println(getEnvVar());
-        if (!Expose_input.getText().matches("\\d+")) {
-            Expose_input.clear();
-
-            Expose_input.setStyle("-fx-border-color: red;);
-        }
-        else {
-            String Expose = "EXPOSE " + Expose_input.getText();
-            System.out.println(Expose);
-        }
-
-
+        String Expose = "EXPOSE " + Expose_input.getText();
+        System.out.println(Expose);
         System.out.println(getCMDInput());
     }
 
