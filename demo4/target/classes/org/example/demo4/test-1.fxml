@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="791.0" maxWidth="1140.0" minHeight="791.0" minWidth="1140.0" prefHeight="791.0" prefWidth="1140.0" style="-fx-background-color: #181818;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo4.HelloController">
+   <bottom>
+      <Pane prefHeight="671.0" prefWidth="1140.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane layoutX="37.0" layoutY="91.0" style="-fx-border-color: black; -fx-border-radius: 1.5%;">
+               <bottom>
+                  <Pane prefHeight="543.0" prefWidth="1053.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField id="Application_type" fx:id="Application_type" layoutX="81.0" layoutY="91.0" prefHeight="25.0" prefWidth="266.0" promptText="e.g java spring boot" />
+                        <TextField id="Application_name" fx:id="Application_name" layoutX="81.0" layoutY="155.0" prefHeight="25.0" prefWidth="269.0" promptText=" my-app" />
+                        <TextField id="From_input" fx:id="From_input" layoutX="80.0" layoutY="313.0" prefHeight="25.0" prefWidth="269.0" promptText="eclispe" />
+                        <TextField id="Expose_input" fx:id="Expose_input" layoutX="78.0" layoutY="366.0" prefHeight="25.0" prefWidth="272.0" promptText="8080" />
+                        <TextField id="Version_input" fx:id="Version_input" layoutX="656.0" layoutY="91.0" prefHeight="25.0" prefWidth="293.0" promptText="21(LTS)" />
+                        <TextField id="Command_input" fx:id="Command_input" layoutX="656.0" layoutY="216.0" prefHeight="25.0" prefWidth="294.0" promptText="mvn clean package -DskipTests" />
+                        <TextField id="CMD_input" fx:id="CMD_input" layoutX="79.0" layoutY="420.0" prefHeight="25.0" prefWidth="272.0" promptText="java -jar app.jar" />
+                        <Label layoutX="79.0" layoutY="46.0" text="1.Application Details">
+                           <font>
+                              <Font name="Ubuntu Mono Regular" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="81.0" layoutY="76.0" text="Application Type">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="82.0" layoutY="140.0" text="Application Name">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="80.0" layoutY="201.0" text="Project Source">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="81.0" layoutY="298.0" text="Base Image/FROM">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="81.0" layoutY="351.0" text="Application Port/Expose">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="81.0" layoutY="405.0" text="Start Command/CMD">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="78.0" layoutY="266.0" text="2.Docker Configuration">
+                           <font>
+                              <Font name="Ubuntu Mono Regular" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="656.0" layoutY="46.0" text="3.Build Configuratgion">
+                           <font>
+                              <Font name="Ubuntu Mono Regular" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="656.0" layoutY="76.0" text="Language / Runtime Version">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="656.0" layoutY="140.0" text="Build Tool">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField id="Tool_input" fx:id="Tool_input" layoutX="655.0" layoutY="155.0" prefHeight="25.0" prefWidth="294.0" promptText="Maven" />
+                        <Label layoutX="655.0" layoutY="201.0" text="Build Command(Optional)">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="656.0" layoutY="302.0" text="4.Environment Variables">
+                           <font>
+                              <Font name="Ubuntu Mono Regular" size="19.0" />
+                           </font>
+                        </Label>
+                        <Button id="Gen_Doc_file_button" fx:id="Gen_Doc_file_button" layoutX="705.0" layoutY="487.0" mnemonicParsing="false" onAction="#onGen_Doc_file_buttonClick" prefHeight="38.0" prefWidth="270.0" style="-fx-background-color: #2563eb;" text="Generate Dockerfile &amp; Build Image -&gt;" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button id="Restet_button" fx:id="Restet_button" layoutX="58.0" layoutY="496.0" mnemonicParsing="false" onAction="#onRestet_buttonClick" style="-fx-background-color: white;" text="Reset">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Line endX="449.0" layoutX="527.0" layoutY="472.0" startX="-488.0" stroke="#a1a1a1" />
+                        <TextField id="Artifact_input" fx:id="Artifact_input" layoutX="655.0" layoutY="265.0" prefHeight="25.0" prefWidth="294.0" promptText="app.jar" />
+                        <Label layoutX="655.0" layoutY="251.0" text="Output/Artifact">
+                           <font>
+                              <Font name="Segoe UI" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button id="ZIP_upload_button" fx:id="ZIP_upload_button" layoutX="216.0" layoutY="217.0" mnemonicParsing="false" onAction="#onZIP_upload_buttonClick" prefHeight="5.0" prefWidth="135.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 5px;" text="Upload ZIP Project">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Button>
+                        <ScrollPane id="Env_var_pane" fx:id="Env_var_scroll_pane" layoutX="655.0" layoutY="324.0" prefHeight="86.0" prefWidth="331.0" style="-fx-border-color: white; -fx-background-color: rgba(0,0,0,0);">
+                           <content>
+                              <FlowPane id="Env_var_child_pane" fx:id="Env_var_flow_pane" prefHeight="82.0" prefWidth="326.0" />
+                           </content>
+                        </ScrollPane>
+                        <TextField id="Git_repo" fx:id="Project_source" layoutX="82.0" layoutY="216.0" prefHeight="25.0" prefWidth="132.0" promptText="Git Repository" />
+                        <Button id="Add_Env_var_button" fx:id="Add_Env_var_button" layoutX="658.0" layoutY="422.0" mnemonicParsing="false" onAction="#onAdd_Env_var_buttonClick" style="-fx-background-color: white;" text="+Add variable">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+               </bottom>
+            </BorderPane>
+            <Label layoutX="37.0" layoutY="8.0" prefHeight="51.0" prefWidth="375.0" text="Enter Application Details">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="31.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="54.0" text="Configure your application and Docker build settings">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </bottom>
+   <top>
+      <Pane prefHeight="120.0" prefWidth="1140.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@brand-group.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="174.0" fitWidth="583.0" layoutX="359.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@stepper-group.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
