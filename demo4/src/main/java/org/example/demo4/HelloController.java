@@ -14,10 +14,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 
 import java.io.File;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -81,21 +80,21 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    protected void onGen_Doc_file_buttonClick() {
+    protected void onGen_Doc_file_buttonClick() throws IOException {
         int filledFeilds = 0;
         for(int i = 0; i < TextFieldArray.size(); i++ ) {
             if (Objects.equals(TextFieldArray.get(i).getText(), "")) {
                 TextFieldArray.get(i).setStyle("-fx-border-color: red; -fx-border-width: 1px;");
             } else {
-                if (!Expose_input.getText().matches("\\d+")) {
-                    Expose_input.clear();
-                    Expose_input.setPromptText("number's only");
-                    Expose_input.setStyle("-fx-border-color: red;");
-                    return;
-                }
                 TextFieldArray.get(i).setStyle("-fx-border-color: green; -fx-border-width: 1px;");
                 filledFeilds++;
             }
+        }
+        if (!Objects.equals(Expose_input.getText(),"") && !Expose_input.getText().matches("\\d+")) {
+            Expose_input.clear();
+            Expose_input.setPromptText("number's only");
+            Expose_input.setStyle("-fx-border-color: red;");
+            return;
         }
         if (filledFeilds >= TextFieldArray.size() ) {
             stringMapper();
@@ -173,19 +172,22 @@ public class HelloController implements Initializable {
         }
         return EnvVarString;
     }
-    protected void stringMapper(){
-        String From = "FROM "+ From_input.getText() + ":" + Version_input.getText();
-        System.out.println(From);
-        System.out.println("WORKDIR /app");
+    protected void stringMapper() throws IOException {
+        dockerFileWriter.filewriteropen();
+        String From = "FROM "+ From_input.getText() + ":" + Version_input.getText() + "\n";
+        dockerFileWriter.fileWriter(From);
+        dockerFileWriter.fileWriter("WORKDIR /app" + "\n");
         if(!Objects.equals(Command_input.getText(), "")){
-            String Run = "RUN " + Command_input.getText();
+            String Run = "RUN " + Command_input.getText() + "\n";
+            dockerFileWriter.fileWriter(Run);
         }
-        String Copy = "COPY target/" + Artifact_input.getText() + " app.jar";
-        System.out.println(Copy);
-        System.out.println(getEnvVar());
-        String Expose = "EXPOSE " + Expose_input.getText();
-        System.out.println(Expose);
-        System.out.println(getCMDInput());
+        String Copy = "COPY target/" + Artifact_input.getText() + " app.jar" + "\n";
+        dockerFileWriter.fileWriter(Copy);
+        dockerFileWriter.fileWriter(getEnvVar());
+        String Expose = "EXPOSE " + Expose_input.getText() + "\n";
+        dockerFileWriter.fileWriter(Expose);
+        dockerFileWriter.fileWriter(getCMDInput());
+        dockerFileWriter.fileWriterclose();
     }
 
     protected String getCMDInput(){
