@@ -7,7 +7,7 @@ import java.io.IOException;
 public class dockerFileWriter {
      static FileWriter f;
     public static void filewriteropen() throws IOException {
-        f = new FileWriter("dockerfile");
+        f = new FileWriter("Dockerfile");
     }
 
     public static void fileWriter(String s) throws IOException {

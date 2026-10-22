@@ -2,8 +2,10 @@ package org.example.demo4;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class HelloController implements Initializable {
+public class dockerFIleFromController implements Initializable {
     @FXML
     private TextField Application_type;
 
@@ -80,7 +82,7 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    protected void onGen_Doc_file_buttonClick() throws IOException {
+    protected void onGen_Doc_file_buttonClick(ActionEvent event) throws IOException {
         int filledFeilds = 0;
         for(int i = 0; i < TextFieldArray.size(); i++ ) {
             if (Objects.equals(TextFieldArray.get(i).getText(), "")) {
@@ -97,7 +99,8 @@ public class HelloController implements Initializable {
             return;
         }
         if (filledFeilds >= TextFieldArray.size() ) {
-            stringMapper();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stringMapper(stage);
         }
     }
 
@@ -143,7 +146,6 @@ public class HelloController implements Initializable {
         File selectedfile = fileChooser.showOpenDialog(stage);
         if(selectedfile != null){
             Project_source.setText(selectedfile.getAbsolutePath());
-            System.out.println(selectedfile.getAbsolutePath());
         }
         else {
             System.out.println("no file selected");
@@ -172,7 +174,7 @@ public class HelloController implements Initializable {
         }
         return EnvVarString;
     }
-    protected void stringMapper() throws IOException {
+    protected void stringMapper(Stage stage) throws IOException {
         dockerFileWriter.filewriteropen();
         String From = "FROM "+ From_input.getText() + ":" + Version_input.getText() + "\n";
         dockerFileWriter.fileWriter(From);
@@ -188,6 +190,7 @@ public class HelloController implements Initializable {
         dockerFileWriter.fileWriter(Expose);
         dockerFileWriter.fileWriter(getCMDInput());
         dockerFileWriter.fileWriterclose();
+        senceloader(stage);
     }
 
     protected String getCMDInput(){
@@ -210,5 +213,11 @@ public class HelloController implements Initializable {
             }
         }
         return CMD;
+    }
+
+    protected void senceloader(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("imageCreationPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
     }
 }

@@ -1,9 +1,6 @@
-FROM k:k
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-RUN k
-COPY target/k app.jar
-ENV k=
-ENV k=
-ENV k=
-EXPOSE 8
-CMD ["k"]
+COPY target/app.jar app.jar
+ENV SPRING_PROFILES_ACTIVE=prod
+EXPOSE 8080
+CMD ["java","-jar","app.jar"]
