@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="791.0" maxWidth="1140.0" minHeight="791.0" minWidth="1140.0" prefHeight="791.0" prefWidth="1140.0" style="-fx-background-color: #181818;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo4.imageCreationController">
+<BorderPane maxHeight="791.0" maxWidth="1140.0" minHeight="791.0" minWidth="1140.0" prefHeight="791.0" prefWidth="1140.0" style="-fx-background-color: #181818;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo4.imageCreationController">
    <bottom>
       <Pane prefHeight="671.0" prefWidth="1140.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane layoutX="27.0" layoutY="24.0" prefHeight="623.0" prefWidth="1087.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-width: 1px;">
+            <BorderPane layoutX="27.0" layoutY="65.0" prefHeight="582.0" prefWidth="1087.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-width: 1px;">
                <center>
-                  <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="954.0" style="-fx-background-radius: 10px;" stylesheets="@scorllpane.css" BorderPane.alignment="CENTER">
+                  <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="798.0" style="-fx-background-radius: 10px;" stylesheets="@scorllpane.css" BorderPane.alignment="CENTER">
                      <content>
-                        <FlowPane fx:id="flowPane" columnHalignment="CENTER" prefHeight="554.0" prefWidth="947.0" />
+                        <FlowPane fx:id="flowPane" columnHalignment="CENTER" prefHeight="554.0" prefWidth="786.0" />
                      </content></ScrollPane>
                </center>
             </BorderPane>
+            <Button fx:id="backbutton" layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #2563eb;" text="&lt;- back" textFill="WHITE" />
          </children>
       </Pane>
    </bottom>

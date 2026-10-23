@@ -6,16 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.IValue;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,14 +69,26 @@ public class dockerFIleFromController implements Initializable {
     @FXML
     private FlowPane Env_var_flow_pane;
 
+    @FXML
+    private ComboBox defultDataChocie;
+
+    String[][] defaults = {
+            {"Java (Maven)", null, null, "eclipse-temurin", "8080", "java -jar app.jar", "21-jre",    "Maven", "app.jar"},
+            {"Node",         null, null, "node",            "3000", "npm start",         "20-alpine", "npm",   "-"},
+            {"Python",       null, null, "python",          "8000", "python app.py",     "3.12-slim", "pip",   "-"},
+            {"Static",       null, null, "nginx",           "80",   "-",                 "alpine",    "-",     "index.html"}
+    };
+
     Map<String,String> EnvVar = new LinkedHashMap<>();
     int EnvVarChildCount = 0;
     private ArrayList<TextField> TextFieldArray;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TextFieldArray = new ArrayList<>(List.of(Application_type,Application_name,Project_source,From_input,Expose_input,CMD_input,Version_input,Tool_input,Artifact_input));
         Env_var_scroll_pane.setFitToWidth(true);
+        defultDataChocie.getItems().addAll("python","java","node","static");
     }
 
     @FXML
@@ -161,6 +171,30 @@ public class dockerFIleFromController implements Initializable {
         Env_var_flow_pane.getChildren().clear();
     }
 
+    @FXML
+    protected void onDefultchoice(){
+        int option = 0;
+        String value = defultDataChocie.getValue().toString();
+        if(Objects.equals(value, "python")){
+            defultDataChocie.setPromptText("python");
+            option = 2;
+        }
+        if(Objects.equals(value, "java")){
+            defultDataChocie.setPromptText("java");
+        }
+        if(Objects.equals(value, "node")){
+            defultDataChocie.setPromptText("node");
+            option = 1;
+        }
+        if(Objects.equals(value, "static")){
+            defultDataChocie.setPromptText("static");
+            option = 3;
+        }
+        for(int i = 0; i < TextFieldArray.size(); i++ ){
+            TextFieldArray.get(i).setText(defaults[option][i]);
+        }
+    }
+
     protected String getEnvVar(){
         String EnvVarString = "";
         for(Node node: Env_var_flow_pane.getChildren()){
@@ -183,7 +217,7 @@ public class dockerFIleFromController implements Initializable {
             String Run = "RUN " + Command_input.getText() + "\n";
             dockerFileWriter.fileWriter(Run);
         }
-        String Copy = "COPY target/" + Artifact_input.getText() + " app.jar" + "\n";
+        String Copy = "COPY target/" + Artifact_input.getText() + " " + Artifact_input.getText()+  "\n";
         dockerFileWriter.fileWriter(Copy);
         dockerFileWriter.fileWriter(getEnvVar());
         String Expose = "EXPOSE " + Expose_input.getText() + "\n";

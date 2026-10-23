@@ -1,6 +1,5 @@
-FROM eclipse-temurin:21-jre
+FROM nginx:alpine
 WORKDIR /app
-COPY target/app.jar app.jar
-ENV SPRING_PROFILES_ACTIVE=prod
-EXPOSE 8080
-CMD ["java","-jar","app.jar"]
+COPY target/index.html index.html
+EXPOSE 80
+CMD ["-"]

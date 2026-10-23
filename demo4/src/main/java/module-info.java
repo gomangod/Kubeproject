@@ -10,6 +10,8 @@ module org.example.demo4 {
     requires com.github.dockerjava.transport;
     requires com.github.dockerjava.transport.httpclient5;
     requires org.slf4j;
+    requires org.bouncycastle.util;
+    requires java.desktop;
 
     opens org.example.demo4 to javafx.fxml;
     exports org.example.demo4;
