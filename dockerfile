@@ -1,5 +1,5 @@
-FROM nginx:alpine
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY target/index.html index.html
-EXPOSE 80
-CMD ["-"]
+COPY target/app.jar app.jar
+EXPOSE 8080
+CMD ["java","-jar","app.jar"]
