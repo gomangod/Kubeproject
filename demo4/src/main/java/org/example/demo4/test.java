@@ -21,7 +21,7 @@ public class test {
     @FXML
     private void handleHamburgerClick() {
         ContextMenu menu = new ContextMenu();
-        MenuItem createImage = new MenuItem("Create Image");
+        MenuItem createImage = new MenuItem("Application Details");
         createImage.setOnAction(event -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("dockerFileFrom.fxml"));
