@@ -20,25 +20,17 @@ public class test {
 
     @FXML
     private void handleHamburgerClick() {
-
         ContextMenu menu = new ContextMenu();
-
         MenuItem createImage = new MenuItem("Create Image");
-
         createImage.setOnAction(event -> {
             try {
-                Parent root = FXMLLoader.load(
-                        getClass().getResource("dockerFileFrom.fxml")
-                );
-
+                Parent root = FXMLLoader.load(getClass().getResource("dockerFileFrom.fxml"));
                 Stage stage = (Stage) menuButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
         menu.getItems().add(createImage);
         menu.show(menuButton, Side.BOTTOM, 0, 0);
     }
